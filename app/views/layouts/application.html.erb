@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>InteriorApp</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div class="header">
+      <div class="container">
+        <div class="logo"> <a href="/">Logo</a> </div>
+        <div class="menu"> <a class="toggleMenu" href="#"><img src="/assets/nav_icon.png" alt="" /> </a>
+          <ul class="nav" id="nav">
+            <li class="current"><a href="/">Home</a></li>
+            <li><%= link_to "About" ,  about_home_index_path , method: 'GET' %></li>
+            <li><a href="#">Blog</a></li>
+            <li><%= link_to "Contact", contact_us_home_index_path, method: 'GET' %></li>
+            <%if current_user%> 
+              <li><%= link_to "Log out", destroy_user_session_path, method: 'DELETE' %></li>
+              <li><%= link_to "New Image", new_file_home_index_path , method: 'GET'%></li>
+            <%else%>
+              <li><%= link_to "Log in", new_user_session_path %></li>
+              <li><%= link_to "Sign up", new_user_registration_path %></li>
+            <% end -%>
+            <!--<li class="btn-group" role="group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                     Dropdown
+                        <span class="caret"></span>
+                </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Dropdown link</a></li>
+                        <li><a href="#">Dropdown link</a></li>
+                    </ul>
+            </li>-->
+            <div class="clear"></div>
+          </ul>
+          <script type="text/javascript" src="js/responsive-nav.js"></script> 
+        </div>
+        <div class="clearfix"> </div>
+      </div>
+    </div>
+     <p class="notice" style="text-align: center; color: green;"><%= notice %></p>
+    <p class="alert" style="text-align: center; color: red;"><%= alert %></p>
+    <%= yield %>
+    <div class="footer">
+      <div class="footer_midle">
+        <div class='container'>
+          <div class="row">
+            <div class="col-md-3">
+              <ul class="social_left">
+                <li class="facebook"><a href="#"><img src="<%= asset_path "fb.png" %>" alt="" style="hieght: 30px; width: 30px;"/></a></li>
+                <li class="fb_text">
+                  <h4><a href="#">Follow us on Facebook</a></h4>
+                </li>
+                <div class="clearfix"> </div>
+              </ul>
+            </div>
+            <div class="col-md-3">
+              <ul class="social_left">
+                <li class="facebook"><a href="#"><img src="<%= asset_path "twiter.png" %>" alt="" style="hieght: 30px; width: 30px;"/></a></li>
+                <li class="fb_text">
+                  <h4><a href="#">Follow us on Twitter</a></h4>
+                </li>
+                <div class="clearfix"> </div>
+              </ul>
+            </div>
+            <div class="col-md-3">
+              <ul class="social_left">
+                <li class="facebook"><a href="#"><img src="<%= asset_path "g-plus.png" %>" alt="" style="hieght: 30px; width: 30px;"/></a></li>
+                <li class="fb_text">
+                  <h4><a href="#">Follow us on Google +</a></h4>
+                </li>
+                <div class="clearfix"> </div>
+              </ul>
+            </div>
+            <div class="col-md-3">
+              <ul class="social_left">
+                <li class="facebook"><a href="#"><img src="<%= asset_path "tube.png" %>" alt="" style="hieght: 30px; width: 30px;"/></a></li>
+                <li class="fb_text">
+                  <h4><a href="#">Follow us on Youtube</a></h4>
+                </li>
+                <div class="clearfix"> </div>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer_bottom">
+        <div class="copy">
+          <p>Copyright &copy; 2016. All right reserved.</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

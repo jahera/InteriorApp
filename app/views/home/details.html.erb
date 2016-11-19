@@ -1,0 +1,74 @@
+<div class="main">
+  <div class="featured_content" id="feature">
+    <div class="container">
+      <div class="row">
+        <% @images.each do |image| %>
+          <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+              <%= image_tag(image.file_url(:thumb),:class=>"thumbnail") if image.present?  %>
+              <!--<img class="img-responsive" src="http://placehold.it/400x300" alt="">-->
+          </div>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">         
+      <div class="modal-body">                
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<style>
+  ul {         
+    padding:0 0 0 0;
+    margin:0 0 0 0;
+  }
+  ul li {     
+    list-style:none;
+    margin-bottom:25px;           
+  }
+  ul li img {
+    cursor: pointer;
+  }
+  .modal-body {
+    padding:5px !important;
+  }
+  .modal-content {
+    border-radius:0;
+  }
+  .modal-dialog img {
+    text-align:center;
+    margin:0 auto;
+  }
+  .controls{          
+    width:50px;
+    display:block;
+    font-size:11px;
+    padding-top:8px;
+    font-weight:bold;          
+  }
+  .next {
+    float:right;
+    text-align:right;
+  }
+  /*override modal for demo only*/
+  .modal-dialog {
+    max-width:500px;
+    padding-top: 90px;
+  }
+  @media screen and (min-width: 768px){
+    .modal-dialog {
+      width:500px;
+      padding-top: 90px;
+    }          
+  }
+  @media screen and (max-width:1500px){
+    #ads {
+      display:none;
+    }
+  }
+</style>

@@ -1,0 +1,96 @@
+<script>
+  $("#yKangID").removeClass("active");
+  $("#DaycareID").removeClass("active");
+  $("#ParentID").removeClass("active");
+  $("#BlogID").removeClass("active");
+  $("#WhatWeDoID").removeClass("active");
+  $("#ContactUsID").addClass("active");
+</script> 
+<div class="container">
+  <% if !current_user.present? %>
+  <div class="jumbotron"></div>
+  <div class="col-md-5">
+    <h2>Contact Info</h2>
+    <p>Works-  Contact Somenath Dey at mob no, or email somnath4ux@gmail.com</p>
+    <div class="clearfix">&nbsp;</div>
+    <p>Support- Contact Support at mob no, or email jahera4ux@gmail.com</p>
+    <div class="clearfix">&nbsp;</div>
+  </div>
+  <div class="col-md-7">
+    <h2>Get in Touch with Us</h2>
+    
+    <%= form_for :contact_us,:url => contact_us_home_index_path,:html => {:id => 'formID'}, :method => :post do |f|  %>
+      <div class="controls">
+        <%= f.text_field:name,autofocus: true ,:placeholder=>"Name",:class=>"validate[required] form-control"%>
+        <p class="help-block"></p>
+      </div>
+      <div class="controls">
+        <%= f.text_field:phone,autofocus: true ,:placeholder=>"Phone No.", :class=>"validate[required] form-control" ,maxlength: "14"%>
+        <p class="help-block"></p>
+      </div>
+      <div class="controls">
+        <%= f.email_field:email,autofocus: true ,:placeholder=>"Email", :class=>"validate[required,custom[email]] form-control" %>
+        <p class="help-block"></p>
+      </div>
+      <div class="controls">
+        <%= f.text_area:info,autofocus: true,:placeholder=>"Message",:rows=>"8", :cols=>"100",:id=>"message", :class=>"validate[required] form-control" %>
+      </div>
+      <div style="float:right; margin:10px 0">
+        <%= f.submit "Send Message" , id: "btn-contact" , class: "btn btn-primary"%>  
+        </div>
+      <%end%>
+    
+  </div>
+  <%else%>
+  <h2 style="text-align: center;">Get in Touch with Us</h2>
+  <div style="clear: both;">&nbsp;</div>
+  <table class="table table-responsive table-condensed table-hover" id="datatable">
+        <thead class="bg-purple">
+          <tr>
+            <th>Name</th>
+            <th>Mobile No</th>
+            <th>Email</th> 
+            <th>Description</th>
+            <th>Date</th>
+            <th style=" text-align: center">Action</th>
+          
+        </tr>
+      </thead>
+      <% @contacts.each do |cont| %>
+        <% @contact = cont.created_at %>
+        <tr>
+          <td><%= cont.name %></td> 
+          <td><%= cont.phone %></td>
+          <td><%= cont.email %></td>
+          <td><%= cont.info %></td> 
+          <td><%= @contact.strftime('%B %d  %Y') %> (<%=time_ago_in_words(@contact)+" "+"ago"%>)</td>
+          <td style="text-align:center;">
+            <span><%#= link_to 'Show', blog %></span>
+            <span><%#= link_to 'Edit', edit_blog_path(blog) %></span>
+            <span><%#= link_to 'Delete', blog, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+          </td>
+        </tr>
+      <% end %>
+
+    </table>
+  
+  
+  <%end%>
+  
+  
+</div>
+<div class=" clearfix"></div>
+<div style="height: 30px">&nbsp;</div>
+
+
+<script type="text/javascript">
+  jQuery(document).ready(function() {
+    var separator = '-'
+    $('#contact_phone').keyup(function() {
+      this.value = this.value.replace(/(\d{3})(\d{3})(\d{4})/, '(' + '$1' + ')' + ' ' + '$2' + separator + '$3');
+    });
+    $("#btn-contact").click(function() {
+      $("#formID").validationEngine();
+    });
+  });
+</script>
